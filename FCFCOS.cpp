@@ -15,15 +15,15 @@ int main()
 	cout << "enter the number" << endl;
 	cin >> P;
 	Fcpc F[P];
-	for(int i = 0; i < P; i++)
+	for(int k = 0; k < P; k++)
 	{
-		cin >> F[i].A;
-		cin >> F[i].AT;
-		cin >> F[i].BT;
+		cin >> F[k].A;
+		cin >> F[k].AT;
+		cin >> F[k].BT;
 	}
 	for(int i = 0; i < P - 1; i++)
 	{
-		for(int j = 0; j < j - P - 1; j++)
+		for(int j = 0; j < P - i - 1; j++)
 		{
 			if(F[j].AT > F[j+1].AT)
 			{
@@ -31,6 +31,8 @@ int main()
 				temp = F[j];
 				F[j] = F[j+1];
 				F[j+1] = temp;
+				
+				
 			}
 			
 		}
