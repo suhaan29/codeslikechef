@@ -1,0 +1,39 @@
+
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int T;
+    cin >> T;
+    
+    for(int i = 1; i <= T; i++)
+    {
+        int N;
+        int K;
+        cin >> N;
+        cin >> K;
+        int A[N];
+        int sum = 0;
+        
+        for(int i = 0; i < N; i++)
+        {
+            cin >> A[i];
+            sum = sum + A[i];
+        }
+        
+        int count = 0;
+        
+        for(int j = 0; j < N; j++)
+        {
+         
+         if((K + A[j]) > (sum - A[j]))
+         {
+             count++;
+         }
+         
+        } cout << count << endl;
+        
+    }
+}
