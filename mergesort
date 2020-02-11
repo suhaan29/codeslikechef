@@ -1,0 +1,134 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+void merge(int arr[], int l, int m, int r)
+{
+    //this will merge the following array
+    
+    int n1, n2; //the size of two temporary arrays
+    
+    n1 = m - l + 1;
+    n2 = r - m;
+    
+    int L[n1], R[n2]; //create two temporary arrays
+    
+    int i;
+    int j;
+    
+    
+    for(i = 0; i < n1; i++)
+    {
+        L[i] = arr[l + i];
+    }
+    for(j = 0; j < n2; j++)
+    {
+        R[j] = arr[m + 1 + j];
+    }
+    
+    i = 0;
+    j = 0;
+    int k = l;
+    
+    
+    while (i < n1 && j < n2) 
+    { 
+        if (L[i] <= R[j]) 
+        { 
+            arr[k] = L[i]; 
+            i++; 
+        } 
+        else
+        { 
+            arr[k] = R[j]; 
+            j++; 
+        } 
+        k++; 
+    } 
+  
+    /* Copy the remaining elements of L[], if there 
+       are any */
+    while (i < n1) 
+    { 
+        arr[k] = L[i]; 
+        i++; 
+        k++; 
+    } 
+  
+    /* Copy the remaining elements of R[], if there 
+       are any */
+    while (j < n2) 
+    { 
+        arr[k] = R[j]; 
+        j++; 
+        k++; 
+    } 
+} 
+  
+/* l is for left index and r is right index of the 
+   sub-array of arr to be sorted */
+    
+    
+
+
+void mergesort(int arr[] , int l , int r) //this will divide the elements 
+{
+    if(l<r){
+    int m; //the middle element of the array
+    
+    m = (l+r)/2;
+    
+    mergesort(arr, l, m);
+    mergesort(arr, m+1 , r);
+    
+    merge(arr, l , m , r);
+    }
+}
+
+void printarray(int A[], int size )
+{
+    int i;
+    for( i = 0 ;i < size; i++)
+    {
+     printf("%d", A[i]);
+     printf("\n");
+    }
+}
+
+int main() //this is the driver program
+{
+    int n; // be the size of the array 
+    printf("please enter the size of the array:  \n");
+    scanf("%d", &n);
+    
+    int array[n];
+    
+    srand(time(0));
+    int i;
+    for(i = 0; i < n; i++)
+    {
+        array[i] = rand()%100; //the given array now has all the required inputs
+    }
+    
+    printf("the array generated is \n \n");
+    int a;
+    
+    for(a = 0; a < n ;a++)
+    {
+        printf("%d ", array[a]);
+    }
+    printf("\n");
+    clock_t t;
+    t = clock(); //to calculate the time
+    
+    mergesort(array, 0, n-1);
+    
+    t = clock() - t;
+    double time_taken = ((double)t)/CLOCKS_PER_SEC;
+    printf("the time taken for the sort :: %f\n", time_taken);
+    
+    //now print the sorted array
+    
+    printarray(array, n);
+
+}
